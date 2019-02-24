@@ -32,6 +32,10 @@ class Server {
       res.header("Access-Control-Allow-Origin", "*"); // разрешение кроссдоменных запросов
       next();
     });
+
+    for (const route of routes) {
+      this.app.use(route);
+    }
   }
 
   public start(port: number) {
