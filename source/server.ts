@@ -2,7 +2,7 @@
  * @description Инициализация приложения
  */
 
-import dotenv from "dotenv";
+require("dotenv").config();
 import express from "express";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
@@ -13,7 +13,6 @@ class Server {
   app: express.Application;
 
   constructor() {
-    dotenv.config(); // подключение переменных среды (.env)
 
     this.app = express(); // эксземпляр приложения express
 

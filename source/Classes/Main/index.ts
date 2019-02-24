@@ -2,6 +2,12 @@
  * @description Базовый класс приложения
  */
 
+import Sequelize from "../../Models";
+
 export default class Main {
-  constructor() {}
+  user: any;
+
+  constructor() {
+    this.user = Sequelize.models.user;
+  }
 }
