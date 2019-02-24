@@ -67,7 +67,7 @@ export default (path: string, fn: (body: any) => any, params?: string[]) => {
         }
     }
 
-    router.get(path, preRoute, middleRoute, postRoute);
+    router.post(path, preRoute, middleRoute, postRoute);
 
     return router;
 }
