@@ -32,6 +32,16 @@ export default (sequelize: any, Sequelize: any) => {
       notEmpty: true
     }
   }, {
+    indexes: [
+      {
+        unique: true,
+        fields: ["phone"]
+      },
+      {
+        unique: true,
+        fields: ["email"]
+      }
+    ],
     freezeTableName: true,
     tableName: "users",
     underscored: true
