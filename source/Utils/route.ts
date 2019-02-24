@@ -28,12 +28,17 @@ const checkParams = (params: string[], body: { [key: string]: any }) => {
 export default (path: string, fn: (body: any) => any, params?: string[]) => {
     const router = Router();
 
-    var response: apiResponse = {};
+    var response: apiResponse;
     var reqTime: number;
 
     const preRoute = (req: Request, res: Response, next: NextFunction) => {
-        reqTime = Date.now();
-        next();
+      response = {
+        data: undefined,
+        error: undefined,
+        meta: undefined
+      };
+      reqTime = Date.now();
+      next();
     }
 
     const middleRoute = async (req: Request, res: Response, next: NextFunction) => {
