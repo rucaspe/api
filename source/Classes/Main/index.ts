@@ -3,16 +3,14 @@
  */
 
 import Sequelize from "../../Models";
+import WhatsApp from "./WhatsApp";
 
 export default class Main {
   Sequelize: any;
-  user: any;
-  confirmation: any;
+  WhatsApp: any;
 
   constructor() {
-    // Модели
     this.Sequelize = Sequelize;
-    this.user = Sequelize.models.user;
-    this.confirmation = Sequelize.models.confirmation;
+    this.WhatsApp = WhatsApp;
   }
 }
