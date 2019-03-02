@@ -8,6 +8,12 @@ const signup = route("/auth/signup", (params: any) => Auth.signup(params), [
   "password"
 ]);
 
+const sendCode = route("/auth/sendCode", (params: any) => Auth.sendCode(params), [
+  "phone",
+  "operation_id"
+]);
+
 export default [
-  signup
+  signup,
+  sendCode
 ];

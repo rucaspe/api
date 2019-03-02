@@ -25,10 +25,12 @@ fs
   });
 
 // Описание связей
+const Code = Sequelize.models.code;
+const CodeOperation = Sequelize.models.code_operation;
 const User = Sequelize.models.user;
-const Confirmation = Sequelize.models.confirmation;
 
-Confirmation.belongsTo(User, { foreignKey: "fk_user_id", targetKey: "user_id" });
+Code.belongsTo(User, { foreignKey: "fk_phone", targetKey: "phone" });
+Code.belongsTo(CodeOperation, { foreignKey: "fk_operation_id", targetKey: "operation_id" });
 
 /**
  * Синхронизация таблиц
@@ -36,7 +38,29 @@ Confirmation.belongsTo(User, { foreignKey: "fk_user_id", targetKey: "user_id" })
  */
 (async () => {
   await User.sync();
-  await Confirmation.sync();
+  await CodeOperation.sync();
+  await Code.sync();
 })();
+
+/**
+ * Служебные данные в таблицах
+ */
+let codes_operations = [
+  {
+    operation_id: 1,
+    name: "Регистрация"
+  },
+  {
+    operation_id: 2,
+    name: "Авторизация"
+  }
+];
+
+for (let row of codes_operations) {
+  CodeOperation.findOrCreate({
+    where: { operation_id: row.operation_id },
+    defaults: { name: row.name }
+  });
+}
 
 export default Sequelize;

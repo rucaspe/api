@@ -1,63 +1,55 @@
 /**
- * @description Пользователь
+ * @description Код подтверждения
  */
 
 export default (sequelize: any, Sequelize: any) => {
-  const User = sequelize.define("user", {
-    user_id: {
+  const Code = sequelize.define("code", {
+    code_id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
       notEmpty: true
     },
-    name: {
-      type: Sequelize.STRING(50),
-      allowNull: false,
-      notEmpty: true
-    },
-    phone: {
+    fk_phone: {
       type: Sequelize.STRING(11),
       allowNull: false,
       notEmpty: true
     },
-    phone_confirmed: {
+    fk_operation_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+      notEmpty: true
+    },
+    code: {
+      type: Sequelize.INTEGER(5),
+      allowNull: false,
+      notEmpty: true
+    },
+    lifetime: {
+      type: Sequelize.DATE,
+      allowNull: false,
+      notEmpty: true
+    },
+    confirmed: {
       type: Sequelize.BOOLEAN,
       allowNull: false,
       notEmpty: true,
       defaultValue: false
-    },
-    email: {
-      type: Sequelize.STRING(100),
-      allowNull: false,
-      notEmpty: true
-    },
-    email_confirmed: {
-      type: Sequelize.BOOLEAN,
-      allowNull: false,
-      notEmpty: true,
-      defaultValue: false
-    },
-    password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      notEmpty: true
     }
   }, {
     indexes: [
       {
-        unique: true,
-        fields: ["phone"]
+        fields: ["code"]
       },
       {
-        unique: true,
-        fields: ["email"]
+        fields: ["lifetime"]
       }
     ],
     freezeTableName: true,
-    tableName: "users",
+    tableName: "codes",
     underscored: true
   });
 
-  return User;
+  return Code;
 }
